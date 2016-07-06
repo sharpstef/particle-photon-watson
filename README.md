@@ -83,7 +83,9 @@ var twit = new twitter({
 
 11. Change the tag being tracked in app.js to your Twitter hashtag of choice.
   
-  `var tag = "ibm";      // TODO Set the tag for Twitter to stream `
+  ```
+   var tag = "ibm";      // TODO Set the tag for Twitter to stream `
+  ```
 
 11. Push the app to Bluemix.
 
@@ -122,7 +124,9 @@ var twit = new twitter({
   
 7. Change the tag being tracked in app.js to your Twitter hashtag of choice.
   
-  `var tag = "ibm";      // TODO Set the tag for Twitter to stream `
+  ```
+  var tag = "ibm";      // TODO Set the tag for Twitter to stream
+  ```
 
 8. Start your app locally with the following commands
 
