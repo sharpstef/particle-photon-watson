@@ -1,0 +1,24 @@
+{
+	"name": "MyMoodRing",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		"express": "4.13.x",
+		"cfenv": "1.0.x",
+		"watson-developer-cloud":"*",
+		"body-parser":"*",
+		"cloudant":"*",
+		"twitter-ng":"*",
+		"request":"*",
+		"ibmiotf":"*",
+		"socket.io":"*",
+		"express-session":"*"
+	},
+	"repository": {},
+	"engines": {
+		"node": "4.x"
+	} 
+}

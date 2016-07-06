@@ -1,0 +1,20 @@
+applications:
+- services:
+    - moodring-cloudant
+    - moodring-tone
+  path: .
+  memory: 256M
+  instances: 1
+  domain: mybluemix.net
+  name: mymoodring
+  host: mymoodring
+  disk_quota: 1024M
+declared-services:
+  moodring-cloudant:
+    label: cloudantNoSQLDB
+    plan:  Shared
+  moodring-tone:
+    label: tone_analyzer
+    plan:  standard
+
+
