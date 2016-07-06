@@ -161,6 +161,8 @@ twit.verifyCredentials(function (err, data) {
 	}
   });
   
+ require("cf-deployment-tracker-client").track();
+  
 /************************************************************************************************* 
   
   Start the server and socket.io and display the index page out of the public directory
@@ -197,6 +199,7 @@ io.listen(app.listen(port, host));
 
 console.log('App listening on ',ip.address());
 
+
 /*************************************************************************************************
  
   Connection and device events for NeoPixel ring with Watson IoT Foundation
@@ -218,7 +221,7 @@ appClient.connect();
 appClient.on("connect", function () {
 	console.log("Connected to broker!");
 
-    appClient.subscribeToDeviceStatus("ledpin");
+    appClient.subscribeToDeviceStatus("lDEVICE_TYPE");  // TODO Update with your device type
 });
 
 // Track the status of the device. Resend data when there is a Connect. 

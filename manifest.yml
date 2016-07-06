@@ -2,6 +2,7 @@ applications:
 - services:
     - moodring-cloudant
     - moodring-tone
+    - moodring-iot
   path: .
   memory: 256M
   instances: 1
@@ -16,5 +17,8 @@ declared-services:
   moodring-tone:
     label: tone_analyzer
     plan:  standard
+  moodring-iot:
+    label: iotf-service
+    plan:  iotf-service-free
 
 

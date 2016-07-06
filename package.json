@@ -14,8 +14,11 @@
 		"twitter-ng":"*",
 		"request":"*",
 		"ibmiotf":"*",
+		"cf-deployment-tracker-client":"*",
 		"socket.io":"*",
-		"express-session":"*"
+		"express-session":"*",
+		"ip":"*"
+		
 	},
 	"repository": {},
 	"engines": {
