@@ -4,7 +4,9 @@
 		<title>Watson Mood Ring - Twitter Tone Analysis</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
 	</head>
 	<body class="landing">
 
@@ -20,8 +22,10 @@
 
 		<!-- Smoothie Chart Display -->
 			<section id="banner">
+            <div class="content">
             <h2>Tone analyzer: #<span id="tag">IBM</span></h2><br />
-				<canvas id="toneGraph" width="750" height="300"></canvas>
+            <div id="toneWrapper">
+				<canvas id="toneGraph" width="890" height="300" ></canvas></div>
                 <ul class="counters">
 						<li class="anger">
 							<strong><div id="a">10%</div></strong> Anger
@@ -39,6 +43,9 @@
 							<strong><div id="s">20%</div></strong> Sadness
 						</li>
 					</ul>
+                    </div>
+                    <a href="#pies" class="next scrolly"><img src="css/images/arrow.svg" /></a> 
+               
 			</section>
             <!-- Pie Chart Display -->
             <section id="pies" class="wrapper style special">

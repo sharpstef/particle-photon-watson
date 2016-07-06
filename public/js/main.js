@@ -2,8 +2,8 @@ $(document).ready(function() {
 
     // Call the graph creator for the toneGraph div
     initGraph('toneGraph');
-
-    // Null out global variables and set div elements for doughnuts
+	
+	// Set global variables 
     var a, d, f, j, s;
     var eDonut;
     var lDonut;
@@ -11,15 +11,17 @@ $(document).ready(function() {
     var eDiv = $("#eDonut");
     var sDiv = $("#sDonut");
     var lDiv = $("#lDonut");
+    var scores = [0,0,0,0,0];
+	var total;
+	var divGroup = ['a','d','f','j','s'];
 
     // Create a client connection to server with socket.io
     var socket = io({
-        forceNew: true,
         autoConnect: true
     });
     socket.connect();
 
-    // Receive the tag for the data and update the tag div
+    // Receive the tag for the data and update the div 'tag'
     socket.on('currentTag', function(data) {
 
         $("#tag").fadeOut('slow', function() {
@@ -32,8 +34,8 @@ $(document).ready(function() {
     // Receive new stats. 
     socket.on('stats', function(data) {
 
-        var tones = [];
-        var total = data[3]; // Need this to do some math
+        // Update the total number of tweets to be display and for percentage math
+		total = data[3];
 
         console.log("Received tone data from server.");
 
@@ -44,37 +46,18 @@ $(document).ready(function() {
         // Total
         // --------------------------------------------------------------------------------
 
-		// Create percentages for the boxes
-        for (var i = 0; i < 3; i++) {
-            var traits = data[i];
-            var scores = [];
-
-            for (var t = 0; t < traits.length; t++) {
-                var score = traits[t];
-
-                var percentage = Math.round((score / total) * 100);
-                scores.push(percentage);
-            }
-
-            tones.push(scores);
-        }
-
-		// Fade update the total number of Tweets in the pies section
         $("#tweetsTotal").fadeOut('slow', function() {
             $("#tweetsTotal").html(total);
             $("#tweetsTotal").fadeIn('slow');
         });
+		
+		updatePercentages(data[0]);
 
-        // Update the three doughnuts with the raw data 
-		updateEmotion(data[0]);
+        updateEmotion(data[0]);
         updateLanguage(data[1]);
         updateSocial(data[2]);
-
-        // Update the boxes with the calculated percentages from the for loop
-		updatePercentages(tones[0]);
     });
 
-	// Smoothie chart keeps a stream of raw data for Tweets, the more Tweets the crazier it looks
     socket.on('tweet', function(data) {
         console.log("New tweet data for chart.");
 
@@ -87,7 +70,7 @@ $(document).ready(function() {
      *
      */
 
-    // Global chart settings and colors
+    // Global chart settings
     Chart.defaults.global.legend.display = false;
     var bg5 = ["rgba(0,255,255,1)", "rgba(230,184,0,1)", "rgba(255,0,254,1)", "rgba(255,136,0,1)", "rgba(0,255,156,1)"];
     var bg3 = ["rgba(0,255,255,1)", "rgba(230,184,0,1)", "rgba(255,0,254,1)"];
@@ -199,12 +182,25 @@ $(document).ready(function() {
      * @data {array} array of percent rounded values
      *
      */
-    function updatePercentages(tones) {
-        contentFade("a", tones[0]);
-        contentFade("d", tones[1]);
-        contentFade("f", tones[2]);
-        contentFade("j", tones[3]);
-        contentFade("s", tones[4]);
+    function updatePercentages(data) {
+		var tones = [0,0,0,0,0];
+		
+		// Converting traits for dataSet 0 to percentages for boxes
+        for (var t = 0; t < data.length; t++) {
+            var score = data[t];
+
+            var percentage = Math.round((score / total) * 100);
+			
+			if(percentage!==scores[t]){
+				console.log("Percentage: "+percentage+" Old Score: "+scores[t]);
+				contentFade(divGroup[t],percentage);
+			}
+
+            tones[t]=percentage;
+
+        }
+		
+		scores = tones;
     }
 
     function updateEmotion(data) {
