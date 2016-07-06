@@ -69,7 +69,6 @@ var tweets = [];
 var stats = [];
 var led = [];
 var ledStats = [];
-var allTweets = 0;
 var t = 0;       // Variable to hold the total number of Tweets
 var dataSet = 0; // Determines the tone set for the Neopixel Ring - 0 Emotion | 1 Language | 2 Social
 
@@ -258,8 +257,6 @@ function streamTwitter(hashtag){
 				curr = new Date().getTime();
 				
 				var msg = tweet.text;
-				console.log("Got tweet: "+msg);
-				allTweets += 1;
 				
 				tweets.push(msg);
 				getTone(msg);
@@ -376,7 +373,6 @@ function getStats(){
 			social=[totalScores[8],totalScores[9],totalScores[10],totalScores[11],totalScores[12]];
 			
 	 		t = doc.totalTweets;
-			allTweets = t;
 			
 			// Send the totals off to the setColors function to format the array for the device
 			if(dataSet === 0) {
